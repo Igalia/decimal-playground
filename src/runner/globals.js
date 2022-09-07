@@ -34,7 +34,56 @@ const binaryExpressionHandler = (left, right, op, message) => {
     return left[SINGLE_OPS[op]](right);
   }
 
-  return Function(`return ${left} ${op} ${right}`)();
+  // evaluate as normal. (The alternative to this big switch statement is to
+  // bring in a dependency like tosource, and use Function('...')() to eval)
+  switch (op) {
+    case "+":
+      return left + right;
+    case "-":
+      return left - right;
+    case "/":
+      return left / right;
+    case "%":
+      return left % right;
+    case "*":
+      return left * right;
+    case "**":
+      return left ** right;
+    case "&":
+      return left & right;
+    case "|":
+      return left | right;
+    case ">>":
+      return left >> right;
+    case ">>>":
+      return left >>> right;
+    case "<<":
+      return left << right;
+    case "^":
+      return left ^ right;
+    case "==":
+      return left == right;
+    case "===":
+      return left === right;
+    case "!=":
+      return left != right;
+    case "!==":
+      return left !== right;
+    case "in":
+      return left in right;
+    case "instanceof":
+      return left instanceof right;
+    case ">":
+      return left > right;
+    case "<":
+      return left < right;
+    case ">=":
+      return left >= right;
+    case "<=":
+      return left <= right;
+    default:
+      console.error(`unhandled BinaryExpression operator '${op}'`);
+  }
 };
 
 const log = (...args) => {
@@ -75,13 +124,33 @@ const unaryEvaluators = {
 };
 
 const wrappedUnaryHandler = (argument, operator, error) => {
-  // TODO: Figure out why Function(`return ${operator} ${argument}`)() fails with typeof
-  if (operator === "typeof") {
-    return typeof argument;
-  }
-
   if (!isDecInstance(argument)) {
-    return Function(`return ${operator} ${argument}`)();
+    // evaluate as normal. (The alternative to this big switch statement is to
+    // bring in a dependency like tosource, and use Function('...')() to eval)
+    switch (operator) {
+      case "void":
+        return void argument;
+      case "throw":
+        throw argument;
+      case "!":
+        return !argument;
+      case "+":
+        return +argument;
+      case "-":
+        return -argument;
+      case "~":
+        return ~argument;
+      case "typeof":
+        return typeof argument;
+      case "delete":
+        // FIXME: delete can't be handled here because if you have an expression
+        // like 'delete a.b' then 'a.b' will already be evaluated by the time it
+        // gets here, so you can't delete the 'b' property.
+        console.log("delete needs to be handled separately");
+        return;
+      default:
+        console.error(`unhandled UnaryExpression operator '${operator}'`);
+    }
   }
 
   if (!Reflect.has(unaryEvaluators, operator)) {
