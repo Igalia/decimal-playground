@@ -5,7 +5,7 @@ const description = "Contrast comparisons: < > <= >=.";
 const text = dedent`
 // The usual Javascript comparator operators
 // < > <= >= work with Decimal values
-// Unlike arithmentic operators, these accept
+// Unlike arithmetic operators, these accept
 // mixed arguments.
 
 const lt = .33m < .99m;

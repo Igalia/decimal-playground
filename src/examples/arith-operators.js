@@ -1,10 +1,10 @@
 import dedent from "dedent";
 
-const title = "Basics: Arithmentic Operators";
-const description = "A tour of the arithmentic operators: + - * / %.";
+const title = "Basics: Arithmetic Operators";
+const description = "A tour of the arithmetic operators: + - * / %.";
 
 const text = dedent`
-// Decimal supports arithmeticical operations: + - * / %
+// Decimal supports arithmetical operations: + - * / %
 
 // *, -, and % work as you expect, but will throw
 // if called with a Decimal mixed with another value
