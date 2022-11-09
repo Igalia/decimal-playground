@@ -278,7 +278,13 @@ export const handleSpecialCaseOps = (t, knownDecimalNodes, path, opToName) => {
     t.StringLiteral(message),
   ]);
 
-  knownDecimalNodes.add(newNode);
+  if (
+    operator === "+" &&
+    knownDecimalNodes.has(left) &&
+    knownDecimalNodes.has(right)
+  ) {
+    knownDecimalNodes.add(newNode);
+  }
 
   path.replaceWith(newNode);
   path.skip();
