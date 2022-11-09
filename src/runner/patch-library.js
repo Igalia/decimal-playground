@@ -83,3 +83,16 @@ export const instanceOfOp = (left, right) => {
   }
   return left instanceof right;
 };
+
+export const inOp = (left, right) => {
+  if (right instanceof Decimal128 || right instanceof Big) {
+    throw new TypeError(
+      `Cannot use 'in' operator to search for '${left}' in ${right}`
+    );
+  }
+  // non-Symbols are coerced to string property names
+  if (left instanceof Decimal128 || left instanceof Big) {
+    return left.toString() in right;
+  }
+  return left in right;
+};
