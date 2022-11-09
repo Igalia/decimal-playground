@@ -71,3 +71,15 @@ export const invertEquals = (left, right) => {
 
 export const invertTypeCheckAndCallEq = (left, right) =>
   !typeCheckAndCallEq(left, right);
+
+export const instanceOfOp = (left, right) => {
+  // cannot check if anything is instanceof a primitive
+  if (right instanceof Decimal128 || right instanceof Big) {
+    throw new TypeError("Right-hand side of instanceof is not an object");
+  }
+  // primitive is not instanceof anything
+  if (left instanceof Decimal128 || left instanceof Big) {
+    return false;
+  }
+  return left instanceof right;
+};

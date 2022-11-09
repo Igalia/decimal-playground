@@ -3,6 +3,7 @@
 import { BIG_DECIMAL, DECIMAL_128 } from "../constants.js";
 import {
   addOrConcat,
+  instanceOfOp,
   invertEquals,
   invertTypeCheckAndCallEq,
   typeCheckAndCallEq,
@@ -98,6 +99,7 @@ Decimal.tripleEquals = typeCheckAndCallEq;
 Decimal.typeof = typeofCheck;
 Decimal.notEquals = invertEquals;
 Decimal.notTripleEquals = invertTypeCheckAndCallEq;
+Decimal.instanceOfOp = instanceOfOp;
 
 Big.prototype.toLocaleString = unimplementedButIntended;
 Decimal128.prototype.toLocaleString = unimplementedButIntended;
