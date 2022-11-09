@@ -1,4 +1,4 @@
-import dedent from "dedent";
+import dedent from "string-dedent";
 
 const title = "Basics: Equality";
 const description = "Egads, check out equality.";
@@ -18,7 +18,6 @@ const mixedTypesTriple = 2m === 2;
 const mixedBigIntTriple = 10n === 10m;
 
 log("not all equal:", sameTypesTriple, mixedTypesTriple, mixedBigIntTriple);
-
 `;
 
 export const EQUALITY = {

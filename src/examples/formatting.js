@@ -1,4 +1,4 @@
-import dedent from "dedent";
+import dedent from "string-dedent";
 
 const title = "Methods: Formatting";
 const description = "Format your decimals.";

@@ -1,4 +1,4 @@
-import dedent from "dedent";
+import dedent from "string-dedent";
 
 const title = "Methods: Rounding";
 const description = "Getting precise with decimals.";

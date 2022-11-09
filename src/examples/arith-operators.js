@@ -1,4 +1,4 @@
-import dedent from "dedent";
+import dedent from "string-dedent";
 
 const title = "Basics: Arithmetic Operators";
 const description = "A tour of the arithmetic operators: + - * / %.";
