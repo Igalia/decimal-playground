@@ -12,7 +12,6 @@ import {
   handleCallExpression,
   handleConditional,
   handleLogicalExpression,
-  handleMemberExpression,
   handleMixedOps,
   handleSingleTypeOps,
   handleSpecialCaseOps,
