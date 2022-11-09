@@ -21,7 +21,7 @@ log("modded:", modded);
 // 21.3m % 1.3;   // uncomment to throw
 
 // + can be used to add or concatenate
-const added = 11.32m + 85.8921m + 10.m;
+const added = 11.32m + 85.8921m + 10m;
 const concatted = 11.32m + " is very cool";
 
 log("added:", added);

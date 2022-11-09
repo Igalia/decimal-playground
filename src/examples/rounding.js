@@ -13,36 +13,41 @@ const d = 6.48904950935m;
 
 // UP
 const up = Decimal.round(d, {
-    maximumFractionDigits: 6,
-    roundingMode: "up"});
+  maximumFractionDigits: 6,
+  roundingMode: "up",
+});
 
 log("up:", up);
 
 // DOWN
 const down = Decimal.round(d, {
-    maximumFractionDigits: 6,
-    roundingMode: "down"});
+  maximumFractionDigits: 6,
+  roundingMode: "down",
+});
 
 log("down:", down);
 
 // HALF_UP
 const halfUp = Decimal.round(6.5m, {
-    maximumFractionDigits: 0,
-    roundingMode: "half-up"});
+  maximumFractionDigits: 0,
+  roundingMode: "half-up",
+});
 
 log("half-up:", halfUp);
 
 // HALF_DOWN
 const halfDown = Decimal.round(6.5m, {
-    maximumFractionDigits: 0,
-    roundingMode: "half-down"});
+  maximumFractionDigits: 0,
+  roundingMode: "half-down",
+});
 
 log("half-down:", halfDown);
 // HALF_EVEN
 
 const halfEven = Decimal.round(d, {
-    maximumFractionDigits: 6,
-    roundingMode: "half-even"});
+  maximumFractionDigits: 6,
+  roundingMode: "half-even",
+});
 
 log("half-even:", halfEven);
 
@@ -57,8 +62,8 @@ log("floor:", floor);
 // by using methods on the Decimal object
 
 const options = {
-    maximumFractionDigits: 6,
-    roundingMode: "up"
+  maximumFractionDigits: 6,
+  roundingMode: "up",
 };
 
 const add = Decimal.add(d, 4.5m, options);
