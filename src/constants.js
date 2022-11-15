@@ -62,6 +62,8 @@ const SPECIAL_CASE_OPS = {
   "===": "tripleEquals",
   "!=": "notEquals",
   "!==": "notTripleEquals",
+  instanceof: "instanceOfOp",
+  in: "inOp",
 };
 
 export {

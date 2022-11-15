@@ -99,7 +99,7 @@ const handleMemberCall = (t, path, knownDecimalNodes) => {
   }
 
   const argIsDecimal = knownDecimalNodes.has(args[0]);
-  const argIsIdentifier = isDefiniedIdentifier(t, args[0]);
+  const argIsIdentifier = isDefinedIdentifier(t, args[0]);
 
   if (!argIsDecimal && !argIsIdentifier) {
     return;
@@ -167,9 +167,9 @@ const sameTypeCheck = (path, knownDecimalNodes, t) => {
   const { left, right } = path.node;
 
   const leftIsPossiblyDecimal =
-    knownDecimalNodes.has(left) || isDefiniedIdentifier(t, left);
+    knownDecimalNodes.has(left) || isDefinedIdentifier(t, left);
   const rightIsPossiblyDecimal =
-    knownDecimalNodes.has(right) || isDefiniedIdentifier(t, right);
+    knownDecimalNodes.has(right) || isDefinedIdentifier(t, right);
 
   if (leftIsPossiblyDecimal !== rightIsPossiblyDecimal) {
     throw path.buildCodeFrameError(
@@ -188,7 +188,7 @@ const unaryNegate = (t, knownDecimalNodes, path, argument) => {
   path.skip();
 };
 
-export const isDefiniedIdentifier = (t, arg) =>
+export const isDefinedIdentifier = (t, arg) =>
   t.isIdentifier(arg) && !t.isIdentifier(arg, { name: "undefined" });
 
 export const createIdentifierNode = (t, path, { left, right, operator }) => {
@@ -278,7 +278,13 @@ export const handleSpecialCaseOps = (t, knownDecimalNodes, path, opToName) => {
     t.StringLiteral(message),
   ]);
 
-  knownDecimalNodes.add(newNode);
+  if (
+    operator === "+" &&
+    knownDecimalNodes.has(left) &&
+    knownDecimalNodes.has(right)
+  ) {
+    knownDecimalNodes.add(newNode);
+  }
 
   path.replaceWith(newNode);
   path.skip();
@@ -307,11 +313,11 @@ export const handleCallExpression =
 export const handleConditional = (t, knownDecimalNodes) => (path) => {
   const { test, consequent, alternate, type } = path.node;
 
-  if (!isDefiniedIdentifier(t, test) && !knownDecimalNodes.has(test)) {
+  if (!isDefinedIdentifier(t, test) && !knownDecimalNodes.has(test)) {
     return;
   }
 
-  const convertedTest = isDefiniedIdentifier(t, test)
+  const convertedTest = isDefinedIdentifier(t, test)
     ? t.callExpression(t.Identifier("wrappedConditionalTest"), [
         t.Identifier(test.name),
       ])
@@ -380,7 +386,7 @@ export const unaryDecimalFns = {
 export const replaceWithUnaryDecimalExpression =
   (t, knownDecimalNodes) => (path) => {
     const { argument, operator } = path.node;
-    const isIdentifier = isDefiniedIdentifier(t, argument);
+    const isIdentifier = isDefinedIdentifier(t, argument);
 
     if (!knownDecimalNodes.has(argument) && !isIdentifier) {
       return;

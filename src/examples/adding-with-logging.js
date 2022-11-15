@@ -1,4 +1,4 @@
-import dedent from "dedent";
+import dedent from "string-dedent";
 
 export const ADDING_WITH_LOGGING = {
   title: "Using the Playground: Adding with Logging",

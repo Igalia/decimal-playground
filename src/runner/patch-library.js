@@ -71,3 +71,28 @@ export const invertEquals = (left, right) => {
 
 export const invertTypeCheckAndCallEq = (left, right) =>
   !typeCheckAndCallEq(left, right);
+
+export const instanceOfOp = (left, right) => {
+  // cannot check if anything is instanceof a primitive
+  if (right instanceof Decimal128 || right instanceof Big) {
+    throw new TypeError("Right-hand side of instanceof is not an object");
+  }
+  // primitive is not instanceof anything
+  if (left instanceof Decimal128 || left instanceof Big) {
+    return false;
+  }
+  return left instanceof right;
+};
+
+export const inOp = (left, right) => {
+  if (right instanceof Decimal128 || right instanceof Big) {
+    throw new TypeError(
+      `Cannot use 'in' operator to search for '${left}' in ${right}`
+    );
+  }
+  // non-Symbols are coerced to string property names
+  if (left instanceof Decimal128 || left instanceof Big) {
+    return left.toString() in right;
+  }
+  return left in right;
+};

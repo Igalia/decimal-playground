@@ -1,10 +1,10 @@
-import dedent from "dedent";
+import dedent from "string-dedent";
 
-const title = "Basics: Arithmentic Operators";
-const description = "A tour of the arithmentic operators: + - * / %.";
+const title = "Basics: Arithmetic Operators";
+const description = "A tour of the arithmetic operators: + - * / %.";
 
 const text = dedent`
-// Decimal supports arithmeticical operations: + - * / %
+// Decimal supports arithmetical operations: + - * / %
 
 // *, -, and % work as you expect, but will throw
 // if called with a Decimal mixed with another value
@@ -21,7 +21,7 @@ log("modded:", modded);
 // 21.3m % 1.3;   // uncomment to throw
 
 // + can be used to add or concatenate
-const added = 11.32m + 85.8921m + 10.m;
+const added = 11.32m + 85.8921m + 10m;
 const concatted = 11.32m + " is very cool";
 
 log("added:", added);

@@ -1,4 +1,4 @@
-import dedent from "dedent";
+import dedent from "string-dedent";
 
 const title = "Methods: Formatting";
 const description = "Format your decimals.";
@@ -28,7 +28,7 @@ log("exponential 2:", v3.toExponential(3, { roundingMode: "half-up" }));
 
 log("precision 1:", v1.toPrecision(4));
 log("precision 2:", v2.toPrecision(4));
-log("precision 3:", v1.toPrecision(4, { roundingMode: "down"}));
+log("precision 3:", v1.toPrecision(4, { roundingMode: "down" }));
 `;
 
 export const FORMATTING = {

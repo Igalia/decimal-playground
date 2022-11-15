@@ -1,4 +1,4 @@
-import dedent from "dedent";
+import dedent from "string-dedent";
 
 export const SCIENTIFIC_NOTATION = {
   title: "In Action: Scientific Notation",

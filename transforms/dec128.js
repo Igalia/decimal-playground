@@ -12,11 +12,10 @@ import {
   handleCallExpression,
   handleConditional,
   handleLogicalExpression,
-  handleMemberExpression,
   handleMixedOps,
   handleSpecialCaseOps,
   handleSingleTypeOps,
-  isDefiniedIdentifier,
+  isDefinedIdentifier,
   replaceWithDecimal,
   replaceWithUnaryDecimalExpression,
 } from "./shared.js";
@@ -32,7 +31,7 @@ const opToName = {
 const replaceWithBinaryDecimalExpression = (t, knownDecimalNodes) => (path) => {
   let { left, right, operator } = path.node;
 
-  const isIdentifier = (arg) => isDefiniedIdentifier(t, arg);
+  const isIdentifier = (arg) => isDefinedIdentifier(t, arg);
   const includesIdentifierArgument = [left, right].some(isIdentifier);
 
   const leftIsDecimal = knownDecimalNodes.has(left);
