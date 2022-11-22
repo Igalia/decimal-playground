@@ -117,8 +117,11 @@ const handleMemberCall = (t, path, knownDecimalNodes) => {
   const isSupportedDecimalMethod =
     isDecimalMethod && PATCHED_DECIMAL_METHODS.includes(methodName);
 
-  if (argIsDecimal && isSupportedMathMethod) {
-    knownDecimalNodes.add(path.node);
+  if (isSupportedMathMethod) {
+    const allArgsAreDecimal = args.every((arg) => knownDecimalNodes.has(arg));
+    if (allArgsAreDecimal) {
+      knownDecimalNodes.add(path.node);
+    }
     return;
   }
 
