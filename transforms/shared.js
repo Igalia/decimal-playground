@@ -269,6 +269,21 @@ export const handleSpecialCaseOps = (t, knownDecimalNodes, path, opToName) => {
   // create call to Decimal[opToName[operator]]
   let { left, right, operator } = path.node;
 
+  if (
+    operator === "+" &&
+    knownDecimalNodes.has(left) &&
+    knownDecimalNodes.has(right)
+  ) {
+    // Binary + expression with both operands known to be Decimals, like
+    // 0.1m + 0.2m, can be transformed to an .add() method call
+    const member = t.memberExpression(left, t.identifier("add"));
+    const newNode = t.callExpression(member, [right]);
+    knownDecimalNodes.add(newNode);
+    path.replaceWith(newNode);
+    path.skip();
+    return;
+  }
+
   const { message } = path.buildCodeFrameError("");
 
   const member = t.memberExpression(
@@ -280,14 +295,6 @@ export const handleSpecialCaseOps = (t, knownDecimalNodes, path, opToName) => {
     right,
     t.StringLiteral(message),
   ]);
-
-  if (
-    operator === "+" &&
-    knownDecimalNodes.has(left) &&
-    knownDecimalNodes.has(right)
-  ) {
-    knownDecimalNodes.add(newNode);
-  }
 
   path.replaceWith(newNode);
   path.skip();
