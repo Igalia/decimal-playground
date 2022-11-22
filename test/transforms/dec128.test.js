@@ -145,7 +145,7 @@ const inBinaryExpressions = {
 const inFunctions = {
   "works with implicit return arrow function": {
     code: "const addToADecimal = (x) => x + 12.6m;",
-    output: "const addToADecimal = (x) => x + Decimal(12.6);",
+    output: `const addToADecimal = (x) => Decimal.addOrConcat(x, ${libName}("12.6"));`,
   },
 };
 
