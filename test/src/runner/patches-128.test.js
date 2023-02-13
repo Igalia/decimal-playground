@@ -3,6 +3,7 @@ import Big from "big.js";
 globalThis.Big = Big;
 import Decimal from "decimal.js";
 globalThis.Decimal = Decimal;
+globalThis.Decimal128 = Decimal;
 
 describe("Runtime tests for Decimal128", function () {
   beforeAll(function () {
